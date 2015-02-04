@@ -64,15 +64,10 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 		contentPane.setLayout(null);
 		
 		
-		String appData = System.getenv("APPDATA");
 		
-		System.out.println(appData);
-		appData = appData.replace("\\","/");
-		System.out.println(appData);
 		
 		
 
-		new File(appData+"/Dossier").mkdir();
 		
 		JLabel lblNewLabel = new JLabel("                     Mp3 Player");
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 20));
