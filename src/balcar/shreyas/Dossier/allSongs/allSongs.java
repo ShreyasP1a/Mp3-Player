@@ -54,6 +54,7 @@ public class allSongs extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		File test;
+		File test1;
 		File f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
 		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
 		
