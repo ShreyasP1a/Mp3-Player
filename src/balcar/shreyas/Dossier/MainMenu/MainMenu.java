@@ -30,7 +30,7 @@ public static String playlistName;
 
 public static File  file;
 public static String  fileName;
-
+public static  String OS = System.getProperty("os.name").toUpperCase();
 	private JPanel contentPane;
 
 	/**
