@@ -52,6 +52,8 @@ public class allSongs extends JFrame {
 		lblNewLabel.setBounds(10, 11, 314, 28);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		contentPane.add(lblNewLabel);
+		
+		File test;
 		File f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
 		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
 		
