@@ -5,15 +5,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -25,15 +22,14 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+
 import balcar.shreyas.Dossier.playSongs.playSongs;
-import balcar.shreyas.Dossier.viewPlaylist.viewPlaylist;
 
 public class allSongs extends JFrame {
 	public static String selectedSong;
 
 	private DefaultListModel listModel;
 	public static int selectedSongIndex;
-	
 	
 
 	private JPanel contentPane;
@@ -53,14 +49,47 @@ public class allSongs extends JFrame {
 		lblNewLabel.setBounds(10, 11, 314, 28);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		contentPane.add(lblNewLabel);
+		final String OS = System.getProperty("os.name").toUpperCase();
+		File f;
 		
-		File f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
+		
+		if(OS.equals("WINDOWS")){
+		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
+		
+		}else{
+			f =new File ("/Users/shreyas/Desktop/Dossier-Project/music/");
+		}
+		
+		
 		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
+		
+		
+		
+		
+	
+		
+		
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(30, 70, 279, 331);
 		contentPane.add(scrollPane);
 		final String[] values = names.toArray(new String[names.size()]);
+		
+		for(int i = 0; i < values.length; i++){
+			String test = values[i];
+			if(test.startsWith(".")) {
+				values[i] = null;
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		listModel = new DefaultListModel();
@@ -70,8 +99,12 @@ public class allSongs extends JFrame {
 		
 		for(String a : values){
 			
-			String str = (a.substring(0, a.length()-4));
-			listModel.addElement(str);
+			if(a == null){
+			}else{
+			String str = a.substring(0, a.length()-4);
+				listModel.addElement(str);
+			}
+		
 		}
 		
 		
@@ -122,61 +155,21 @@ public class allSongs extends JFrame {
 					
 					
 					
+				
+						
+						Path pathWindows = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier Project/Music/"+ list.getSelectedValue() +".mp3");
+						
+						Path pathMac = Paths.get("/Users/shreyas/Desktop/Dossier Project/music/"+ list.getSelectedValue() +".mp3");
 					
-					Path path = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier Project/Music/"+ list.getSelectedValue() +".mp3");
 					try {
-						 Files.delete(path);
+						if(OS.equals("Windows")){
+						 Files.delete(pathWindows);
+						}else{
+							Files.delete(pathMac);
+						}
 						 System.out.println(true);
 						//list.remove(list.getSelectedIndex());
 						listModel.remove(list.getSelectedIndex());
-						
-	
-						
-						File f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/PlayList/");
-						final ArrayList<String> playList = new ArrayList<String>(Arrays.asList(f.list()));
-						final String[] array = playList.toArray(new String[playList.size()]);
-						
-						
-						
-						for(int i = 0; i < array.length;i++){
-						
-						File songs = new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/PlayList/" + array[i]);
-						
-						 
-						 Scanner sc = null;
-						try {
-							sc = new Scanner(songs);
-						} catch (FileNotFoundException z) {
-							// TODO Auto-generated catch block
-							z.printStackTrace();
-						}
-						 
-						 
-							List<String> lines = new ArrayList<String>();
-							while (sc.hasNextLine()) {
-							  lines.add(sc.nextLine());
-							}
-
-							final String[] arr = lines.toArray(new String[0]);
-						
-							for(int j = 0; i< arr.length;i++){
-									String a = arr[i];
-									
-									if(a.equals(list.getSelectedValue())){
-										arr[i] = null;
-									}
-									
-							}
-							
-							
-						}	
-						
-						
-						
-						
-						
-						
-						
 					} catch (IOException t) {
 						// TODO Auto-generated catch block
 						t.printStackTrace();
