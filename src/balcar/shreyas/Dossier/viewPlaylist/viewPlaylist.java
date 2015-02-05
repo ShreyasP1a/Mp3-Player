@@ -55,16 +55,16 @@ public class viewPlaylist extends JFrame {
 		scrollPane.setBounds(32, 64, 265, 387);
 		contentPane.add(scrollPane);
 		File f = null;
-		 final ArrayList<String> names;
+		
+		
+		
+		
 		if(MainMenu.OS.equals("WINDOWS")){
 		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/PlayList/");
-		 names = new ArrayList<String>(Arrays.asList(f.list()));	
-		}else{
-			f =new File ("Users/shreyas/Desktop/Dossier-Project/PlayList/");
-			 names = new ArrayList<String>(Arrays.asList(f.list()));	
+		}else {
+			f =new File ("/Users/shreyas/Desktop/Dossier-Project/PlayList/");
 		}
-			
-		
+		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));	
 		 
 		listModel = new DefaultListModel();
 		for(int i=0;i<names.size();i++) {
@@ -97,7 +97,15 @@ public class viewPlaylist extends JFrame {
 					JOptionPane.showMessageDialog(null, "You did not select a playlist!");
 				}else {
 					
-					Path path = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier Project/Playlist/"+ list.getSelectedValue() +".txt");
+					Path path= null;
+					if(MainMenu.OS.equals("WINDOWS")){
+					 path = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier Project/Playlist/"+ list.getSelectedValue() +".txt");
+					}else{
+						path = Paths.get( "/Users/shreyas/Desktop/Dossier-Project/PlayList/"+ list.getSelectedValue() +".txt");
+					}
+					
+					
+					
 					try {
 						 Files.delete(path);
 						//list.remove(list.getSelectedIndex());
