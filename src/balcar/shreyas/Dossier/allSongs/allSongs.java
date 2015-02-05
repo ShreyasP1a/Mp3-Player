@@ -33,6 +33,7 @@ public class allSongs extends JFrame {
 
 	private DefaultListModel listModel;
 	public static int selectedSongIndex;
+	public static int testValue;
 	
 
 	private JPanel contentPane;
