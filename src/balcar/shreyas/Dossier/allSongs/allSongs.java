@@ -159,7 +159,7 @@ public class allSongs extends JFrame {
 						
 						Path pathWindows = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier Project/Music/"+ list.getSelectedValue() +".mp3");
 						
-						Path pathMac = Paths.get("/Users/shreyas/Desktop/Dossier Project/music/"+ list.getSelectedValue() +".mp3");
+						Path pathMac = Paths.get("/Users/shreyas/Desktop/Dossier-Project/music/"+ list.getSelectedValue() +".mp3");
 					
 					try {
 						if(OS.equals("Windows")){
