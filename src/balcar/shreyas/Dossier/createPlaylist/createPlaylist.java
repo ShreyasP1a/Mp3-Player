@@ -57,19 +57,53 @@ public class createPlaylist extends JFrame {
 		contentPane.add(label);
 		
 		
+		final String OS = System.getProperty("os.name").toUpperCase();
 		
-		File f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
-		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));	
+		
+		
+		
+		
+		
+		
+		File f = null;
+		
+		
+		if(OS.equals("WINDOWS")){
+		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
+		
+		}else {
+			 f =new File ("/Users/shreyas/Desktop/Dossier-Project/music/");
+
+		}
+		 
+		 
+		 final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));	
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(35, 77, 261, 333);
 		contentPane.add(scrollPane);
 		
 		
-	
-		final JList list = new JList();
+		final String[] values = names.toArray(new String[names.size()]);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		for(int i = 0; i < values.length; i++){
+			String test = values[i];
+			if(test.startsWith(".")) {
+				values[i] = null;
+			}
+		}
+		final JList<String> list = new JList<String>();
 		scrollPane.setViewportView(list);
 		list.setModel(new AbstractListModel() {
-			String[] values = names.toArray(new String[names.size()]);
+			
 			public int getSize() {
 				return values.length;
 			}
