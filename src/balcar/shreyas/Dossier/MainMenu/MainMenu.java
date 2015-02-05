@@ -116,8 +116,13 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					 file = fc.getSelectedFile();
 					fileName = file.getName();
-					file.renameTo(new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/" + fileName ));
 					
+					
+					
+					
+					if(OS.equals("WINDOWS")){
+					file.renameTo(new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/" + fileName ));
+					}
 					if(!fc.getSelectedFile().getAbsolutePath().endsWith("mp3")){ 
 						file = new File(fc.getSelectedFile() + ".mp3"); 
 
