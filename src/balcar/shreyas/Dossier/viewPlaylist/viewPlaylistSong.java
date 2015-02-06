@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -32,7 +34,7 @@ public class viewPlaylistSong extends JFrame {
 
 	 viewPlaylistSong() {
 		
-		setBounds(100, 100, 300, 509);
+		setBounds(100, 100, 285, 449);
 		contentPane = new JPanel();
 		setLocationRelativeTo(null);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -40,15 +42,18 @@ public class viewPlaylistSong extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 66, 264, 360);
+		scrollPane.setBounds(10, 66, 249, 303);
 		contentPane.add(scrollPane);
 		
 		
 		
 		listModel = new DefaultListModel();
-
-		 File f = new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
-		
+		 File f = null;
+		 if(MainMenu.OS.equals("Windows")){ 
+		 f = new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
+		 }else {
+			 f = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
+		 }
 		 
 		 Scanner sc = null;
 		try {
@@ -106,7 +111,7 @@ public class viewPlaylistSong extends JFrame {
 		
 		
 		JButton btnPlay = new JButton("Play");
-		btnPlay.setBounds(150, 437, 89, 23);
+		btnPlay.setBounds(151, 377, 89, 23);
 		contentPane.add(btnPlay);
 		System.out.println(viewPlaylist.selectedPlaylist);
 		JLabel playListName = new JLabel(viewPlaylist.selectedPlaylist);
@@ -120,53 +125,15 @@ public class viewPlaylistSong extends JFrame {
 				
 				System.out.println(list.getSelectedValue());
 				if(list.getSelectedValue() == null){
-					JOptionPane.showMessageDialog(null, "You did not select a Song!");
-					
+					JOptionPane.showMessageDialog(null, "You did not select a playlist!");
 				}else {
 					
-					
-					
-					
 					listModel.remove(list.getSelectedIndex());
-				
-				
-					File f = new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
-				
-					 PrintWriter writer;
-						try {
-							
-							
-							if (!f.exists()) {
-								// Create the file
-								f.createNewFile();
-								
-							}
-							writer = new PrintWriter(f, "UTF-8");
-				
-
-						for(int i = 0; i< listModel.getSize(); i++){
-							writer.print(listModel.getElementAt(i));
-							writer.println();
-							System.out.println(listModel.getElementAt(i));
-						}
-							
-							
-							writer.close();
-						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (UnsupportedEncodingException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-				
 				}
 				
 			}
 		});
-		btnDelete.setBounds(20, 437, 89, 23);
+		btnDelete.setBounds(20, 377, 89, 23);
 		contentPane.add(btnDelete);
 		setVisible(true);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 	
