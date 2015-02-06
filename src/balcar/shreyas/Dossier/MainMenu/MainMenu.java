@@ -7,8 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -31,6 +29,7 @@ public static String playlistName;
 public static File  file;
 public static String  fileName;
 public static  String OS = System.getProperty("os.name").toUpperCase();
+
 	private JPanel contentPane;
 
 	/**
@@ -63,11 +62,11 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		
-		
-		
 
+
+		System.out.println(OS);
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("                     Mp3 Player");
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 20));
@@ -116,13 +115,13 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					 file = fc.getSelectedFile();
 					fileName = file.getName();
-					
-					
-					
-					
 					if(OS.equals("WINDOWS")){
 					file.renameTo(new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/" + fileName ));
+					}else {
+						file.renameTo(new File("/Users/shreyas/Desktop/Dossier Project/music/ " + fileName ));
 					}
+					
+					
 					if(!fc.getSelectedFile().getAbsolutePath().endsWith("mp3")){ 
 						file = new File(fc.getSelectedFile() + ".mp3"); 
 
