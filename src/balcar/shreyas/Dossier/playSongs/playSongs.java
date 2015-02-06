@@ -35,9 +35,14 @@ public class playSongs extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		
-		File f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
+		final String OS = System.getProperty("os.name").toUpperCase();
+		File f = null;
+		if(OS.equals("WINDOWS")){
+		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
+		}else{
+			 f =new File ("/Users/shreyas/Desktop/Dossier-Project/music/");
+
+		}
 		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
 		
 		
@@ -45,11 +50,11 @@ public class playSongs extends JFrame {
 				
 		
 		
-		for(String a : array){
-			System.out.println(a);
-		}
 		
 		
+		
+
+	
 		
 		
 		
@@ -121,7 +126,7 @@ public class playSongs extends JFrame {
 			}
 			
 			songTitle.setText(array[allSongs.selectedSongIndex].substring(0, array[allSongs.selectedSongIndex].length()-4));
-				
+			
 		
 				
 				
@@ -132,3 +137,4 @@ public class playSongs extends JFrame {
 		});
 	}
 }
+
