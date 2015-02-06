@@ -59,8 +59,8 @@ public class viewPlaylist extends JFrame {
 		
 		
 		
-		if(MainMenu.OS.equals("WINDOWS")){
-		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/PlayList/");
+		if(MainMenu.OS.equals("WINDOWS 7")){
+		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/");
 		}else {
 			f =new File ("/Users/shreyas/Desktop/Dossier-Project/PlayList/");
 		}
@@ -98,8 +98,8 @@ public class viewPlaylist extends JFrame {
 				}else {
 					
 					Path path= null;
-					if(MainMenu.OS.equals("WINDOWS")){
-					 path = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier Project/Playlist/"+ list.getSelectedValue() +".txt");
+					if(MainMenu.OS.equals("WINDOWS 7")){
+					 path = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier-Project/Playlist/"+ list.getSelectedValue() +".txt");
 					}else{
 						path = Paths.get( "/Users/shreyas/Desktop/Dossier-Project/PlayList/"+ list.getSelectedValue() +".txt");
 					}

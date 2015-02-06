@@ -37,8 +37,8 @@ public class playSongs extends JFrame {
 		
 		final String OS = System.getProperty("os.name").toUpperCase();
 		File f = null;
-		if(OS.equals("WINDOWS")){
-		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
+		if(OS.equals("WINDOWS 7")){
+		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/music/");
 		}else{
 			 f =new File ("/Users/shreyas/Desktop/Dossier-Project/music/");
 

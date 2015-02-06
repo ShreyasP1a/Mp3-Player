@@ -115,10 +115,10 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					 file = fc.getSelectedFile();
 					fileName = file.getName();
-					if(OS.equals("WINDOWS")){
-					file.renameTo(new File("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/" + fileName ));
+					if(OS.equals("WINDOWS 7")){
+					file.renameTo(new File("C:/Users/s07994809/Desktop/workspace/Dossier-Project/music/" + fileName ));
 					}else {
-						file.renameTo(new File("/Users/shreyas/Desktop/Dossier Project/music/ " + fileName ));
+						file.renameTo(new File("/Users/shreyas/Desktop/Dossier-Project/music/ " + fileName ));
 					}
 					
 					
