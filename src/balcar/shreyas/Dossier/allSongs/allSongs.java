@@ -22,7 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-
 import balcar.shreyas.Dossier.playSongs.playSongs;
 
 public class allSongs extends JFrame {
@@ -30,13 +29,11 @@ public class allSongs extends JFrame {
 
 	private DefaultListModel listModel;
 	public static int selectedSongIndex;
-	
 
 	private JPanel contentPane;
 
-	
 	public allSongs() {
-		
+
 		setBounds(100, 100, 350, 487);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -44,131 +41,104 @@ public class allSongs extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("                    All Songs");
 		lblNewLabel.setBounds(10, 11, 314, 28);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 17));
 		contentPane.add(lblNewLabel);
 		final String OS = System.getProperty("os.name").toUpperCase();
-		File f;
+		File f = null;
+
+		System.out.println(OS);
 		
-		
-		if(OS.equals("WINDOWS")){
-		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier Project/music/");
-		
-		}else{
-			f =new File ("/Users/shreyas/Desktop/Dossier-Project/music/");
+		if (OS.equals("WINDOWS 7")) {
+			f = new File(
+					"C:/Users/s07994809/Desktop/workspace/Dossier-Project/music/");
+			System.out.println("Windows");
+		} else {
+			f = new File("/Users/shreyas/Desktop/Dossier-Project/music/");
+			System.out.println("Mac");
 		}
-		
-		
-		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
-		
-		
-		
-		
-	
-		
-		
-		
-		
+
+		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f
+				.list()));
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(30, 70, 279, 331);
 		contentPane.add(scrollPane);
 		final String[] values = names.toArray(new String[names.size()]);
-		
-		for(int i = 0; i < values.length; i++){
+
+		for (int i = 0; i < values.length; i++) {
 			String test = values[i];
-			if(test.startsWith(".")) {
+			if (test.startsWith(".")) {
 				values[i] = null;
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		listModel = new DefaultListModel();
-					
-		
-		
-		
-		for(String a : values){
-			
-			if(a == null){
-			}else{
-			String str = a.substring(0, a.length()-4);
+
+		for (String a : values) {
+
+			if (a == null) {
+			} else {
+				String str = a.substring(0, a.length() - 4);
 				listModel.addElement(str);
 			}
-		
+
 		}
-		
-		
-		
-		
-		
+
 		final JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
-		/*list.setModel(new AbstractListModel() {
-			
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		
-		*/
-		
-		
+		/*
+		 * list.setModel(new AbstractListModel() {
+		 * 
+		 * public int getSize() { return values.length; } public Object
+		 * getElementAt(int index) { return values[index]; } });
+		 */
+
 		JButton btnNewButton = new JButton("Play\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(list.getSelectedIndex()==-1){
-					JOptionPane.showMessageDialog(null, "Please select a song!");
-				}else{
-				selectedSong = (String) list.getModel().getElementAt(list.getSelectedIndex());
-				
-				
-				selectedSongIndex = list.getSelectedIndex();
-				
+				if (list.getSelectedIndex() == -1) {
+					JOptionPane
+							.showMessageDialog(null, "Please select a song!");
+				} else {
+					selectedSong = (String) list.getModel().getElementAt(
+							list.getSelectedIndex());
 
-				
-				new playSongs();
+					selectedSongIndex = list.getSelectedIndex();
+
+					new playSongs();
 				}
-				}
+			}
 		});
 		btnNewButton.setBounds(220, 412, 89, 23);
 		contentPane.add(btnNewButton);
-		
+
 		JButton btnDeleteSong = new JButton("Delete Song\r\n");
 		btnDeleteSong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(list.getSelectedValue() == null){
-					JOptionPane.showMessageDialog(null, "You did not select a Song!");
-				}else {
-					
-					
-					
-				
-						
-						Path pathWindows = Paths.get( "C:/Users/s07994809/Desktop/workspace/Dossier Project/Music/"+ list.getSelectedValue() +".mp3");
-						
-						Path pathMac = Paths.get("/Users/shreyas/Desktop/Dossier-Project/music/"+ list.getSelectedValue() +".mp3");
-					
+				if (list.getSelectedValue() == null) {
+					JOptionPane.showMessageDialog(null,
+							"You did not select a Song!");
+				} else {
+
+					Path pathWindows = Paths
+							.get("C:/Users/s07994809/Desktop/workspace/Dossier Project/Music/"
+									+ list.getSelectedValue() + ".mp3");
+
+					Path pathMac = Paths
+							.get("/Users/shreyas/Desktop/Dossier-Project/music/"
+									+ list.getSelectedValue() + ".mp3");
+
 					try {
-						if(OS.equals("Windows")){
-						 Files.delete(pathWindows);
-						}else{
+						if (OS.equals("Windows")) {
+							Files.delete(pathWindows);
+						} else {
 							Files.delete(pathMac);
 						}
-						 System.out.println(true);
-						//list.remove(list.getSelectedIndex());
+						System.out.println(true);
+						// list.remove(list.getSelectedIndex());
 						listModel.remove(list.getSelectedIndex());
 					} catch (IOException t) {
 						// TODO Auto-generated catch block
