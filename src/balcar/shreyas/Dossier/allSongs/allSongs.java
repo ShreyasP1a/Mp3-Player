@@ -170,7 +170,7 @@ public class allSongs extends JFrame {
 						
 						
 						
-						for(int i = 1; i < values.length;i++){
+						for(int i = 1; i < values.length; i++){
 						
 						
 						File t = null;
@@ -190,6 +190,7 @@ public class allSongs extends JFrame {
 						
 						
 						sc = new Scanner(t);
+						
 							 
 							 
 								List<String> lines = new ArrayList<String>();

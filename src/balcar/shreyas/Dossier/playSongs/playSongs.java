@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -107,8 +108,19 @@ public class playSongs extends JFrame {
 		JLabel playlist = new JLabel("");
 		playlist.setToolTipText("test");
 		playlist.setHorizontalAlignment(SwingConstants.CENTER);
-		playlist.setBounds(10, 22, 275, 23);
+		playlist.setBounds(33, 6, 275, 23);
 		contentPane.add(playlist);
+		
+		
+		ImageIcon shuffle = new ImageIcon("/Users/shreyas/Desktop/Dossier-Project/shuffle3.png");
+		
+		JButton btnNewButton = new JButton(shuffle);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(274, 41, 60, 30);
+		contentPane.add(btnNewButton);
 		setVisible(true);
 		
 		
