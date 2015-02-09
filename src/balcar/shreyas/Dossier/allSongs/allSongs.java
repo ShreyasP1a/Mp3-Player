@@ -5,12 +5,15 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -22,7 +25,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import balcar.shreyas.Dossier.MainMenu.MainMenu;
 import balcar.shreyas.Dossier.playSongs.playSongs;
+import balcar.shreyas.Dossier.viewPlaylist.viewPlaylist;
 
 public class allSongs extends JFrame {
 	public static String selectedSong;
@@ -49,7 +54,7 @@ public class allSongs extends JFrame {
 		final String OS = System.getProperty("os.name").toUpperCase();
 		File f = null;
 
-		System.out.println(OS);
+		
 		
 		if (OS.equals("WINDOWS 7")) {
 			f = new File(
@@ -57,7 +62,7 @@ public class allSongs extends JFrame {
 			System.out.println("Windows");
 		} else {
 			f = new File("/Users/shreyas/Desktop/Dossier-Project/music/");
-			System.out.println("Mac");
+			
 		}
 
 		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f
@@ -138,8 +143,76 @@ public class allSongs extends JFrame {
 							Files.delete(pathMac);
 						}
 						System.out.println(true);
-						// list.remove(list.getSelectedIndex());
+		
 						listModel.remove(list.getSelectedIndex());
+						
+						
+
+						File f = null;
+						
+						
+						
+						
+						if(MainMenu.OS.equals("WINDOWS 7")){
+						 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/");
+						}else {
+							f =new File ("/Users/shreyas/Desktop/Dossier-Project/PlayList/");
+						}
+						final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));	
+						 
+						
+						
+						
+						String[] values = names.toArray(new String[names.size()]);
+						
+						
+						
+						
+						
+						
+						for(int i = 1; i < values.length;i++){
+						
+						
+						File t = null;
+						 if(MainMenu.OS.equals("WINDOWS 7")){ 
+						 t = new File("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/" + values[i]);
+						 }else {
+							 t = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + values[i]);
+						 }
+						
+						Scanner sc = null;
+							
+						
+						
+						
+						
+						
+						
+						
+						sc = new Scanner(t);
+							 
+							 
+								List<String> lines = new ArrayList<String>();
+								while (sc.hasNextLine()) {
+								  lines.add(sc.nextLine());
+								}
+
+								final String[] arr = lines.toArray(new String[0]);
+								
+								for(int j =0; j< arr.length;j++){
+									if(arr[j].equals(list.getSelectedValue())){
+										System.out.println("true");
+									}
+								}
+								
+								
+								
+								sc.close();
+								
+					
+						
+						}	
+						
 					} catch (IOException t) {
 						// TODO Auto-generated catch block
 						t.printStackTrace();

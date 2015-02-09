@@ -64,7 +64,7 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 		
 
 
-		System.out.println(OS);
+	
 		
 		
 		
