@@ -18,10 +18,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import balcar.shreyas.Dossier.Settings.Settings;
 import balcar.shreyas.Dossier.allSongs.allSongs;
 import balcar.shreyas.Dossier.createPlaylist.createPlaylist;
 import balcar.shreyas.Dossier.viewPlaylist.viewPlaylist;
+
+import javax.swing.SwingConstants;
 
 public class MainMenu extends JFrame {
 public static String playlistName;
@@ -54,7 +55,7 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 	 */
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 491);
+		setBounds(100, 100, 275, 400);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -68,9 +69,10 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 		
 		
 		
-		JLabel lblNewLabel = new JLabel("                     Mp3 Player");
+		JLabel lblNewLabel = new JLabel("Mp3 Player");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Arial Black", Font.PLAIN, 20));
-		lblNewLabel.setBounds(24, 11, 400, 39);
+		lblNewLabel.setBounds(53, 38, 172, 39);
 		contentPane.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("All Songs");
@@ -79,7 +81,7 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				new allSongs();
 			}
 		});
-		btnNewButton.setBounds(116, 73, 227, 47);
+		btnNewButton.setBounds(24, 89, 227, 47);
 		contentPane.add(btnNewButton);
 		
 		JButton btnCreatePlaylist = new JButton("Create Playlist");
@@ -90,17 +92,8 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				
 				}
 		});
-		btnCreatePlaylist.setBounds(116, 139, 227, 47);
+		btnCreatePlaylist.setBounds(24, 148, 227, 47);
 		contentPane.add(btnCreatePlaylist);
-		
-		JButton btnSettings = new JButton("Settings");
-		btnSettings.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			new Settings();
-			}
-		});
-		btnSettings.setBounds(116, 325, 227, 47);
-		contentPane.add(btnSettings);
 		
 		JButton btnAddSongs = new JButton("Add Songs");
 		btnAddSongs.addActionListener(new ActionListener() {
@@ -132,11 +125,11 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				
 			}
 		});
-		btnAddSongs.setBounds(116, 267, 227, 47);
+		btnAddSongs.setBounds(24, 267, 227, 47);
 		contentPane.add(btnAddSongs);
 		
 		JButton btnAbout = new JButton("About");
-		btnAbout.setBounds(116, 395, 227, 47);
+		btnAbout.setBounds(24, 326, 227, 47);
 		contentPane.add(btnAbout);
 		
 		JButton btnViewPlaylist = new JButton("View Playlists");
@@ -146,7 +139,7 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				new viewPlaylist();
 			}
 		});
-		btnViewPlaylist.setBounds(116, 209, 227, 47);
+		btnViewPlaylist.setBounds(24, 208, 227, 47);
 		contentPane.add(btnViewPlaylist);
 	}
 }

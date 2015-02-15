@@ -66,15 +66,27 @@ public class viewPlaylist extends JFrame {
 		}
 		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));	
 		 
-		listModel = new DefaultListModel();
-		for(int i=0;i<names.size();i++) {
-			
-			
-	        String str = (names.get(i).substring(0, (names.get(i).length()-4)));
-	        
-			listModel.addElement(str);
-		}
+		final String[] values = names.toArray(new String[names.size()]);
 		
+		for (int i = 0; i < values.length; i++) {
+			String test = values[i];
+			if (test.startsWith(".")) {
+				values[i] = null;
+			}
+		}
+
+		listModel = new DefaultListModel();
+
+		for (String a : values) {
+
+			if (a == null) {
+			} else {
+				String str = a.substring(0, a.length() - 4);
+				listModel.addElement(str);
+			}
+
+		}
+
 		final JList list = new JList(listModel);
 		scrollPane.setViewportView(list);
 		/*list.setModel(new DefaultListModel() {

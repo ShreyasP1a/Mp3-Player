@@ -34,8 +34,11 @@ public class viewPlaylistSong extends JFrame {
 	private JPanel contentPane;
 	private DefaultListModel listModel;
 	public static String selectedPlaylistSong;
+	public static int selectedSongIndex;
 	mp3Player mp3 = new mp3Player();
-	 viewPlaylistSong() {
+	 
+	
+	viewPlaylistSong() {
 		
 		setBounds(100, 100, 285, 449);
 		contentPane = new JPanel();
@@ -43,13 +46,12 @@ public class viewPlaylistSong extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 66, 249, 303);
 		contentPane.add(scrollPane);
 		
 		
-		
+		//Add songs in playlist to listmodel
 		listModel = new DefaultListModel();
 		 File f = null;
 		 if(MainMenu.OS.equals("WINDOWS 7")){ 
@@ -58,25 +60,19 @@ public class viewPlaylistSong extends JFrame {
 			 f = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
 		 }
 		 
-		 Scanner sc = null;
+		Scanner sc = null;
 		try {
 			sc = new Scanner(f);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
-		 
 			List<String> lines = new ArrayList<String>();
 			while (sc.hasNextLine()) {
 			  lines.add(sc.nextLine());
 			}
-
 			final String[] arr = lines.toArray(new String[0]);
-		
-			
-		
-		
+
 			for(String a : arr){
 				
 				String str = (a.substring(0, a.length()-4));
@@ -84,21 +80,7 @@ public class viewPlaylistSong extends JFrame {
 			}
 		
 		sc.close();
-		final JList list = new JList(listModel);
-		
-		
-		
-		
-		/*list.setModel(new AbstractListModel() {
-			
-			public int getSize() {
-				return arr.length;
-			}
-			public Object getElementAt(int index) {
-				return arr[index];
-			}
-		});
-		*/
+		final JList list = new JList(listModel);		
 		scrollPane.setViewportView(list);
 		
 		
@@ -116,10 +98,11 @@ public class viewPlaylistSong extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new playSongs();
-				
 				selectedPlaylistSong = (String) list.getSelectedValue();
-				mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+list.getSelectedValue() +".mp3");
+				selectedSongIndex = list.getSelectedIndex();
+				
+				new playViewPlaylistSongs();
+				
 				
 			}
 		});
@@ -139,7 +122,7 @@ public class viewPlaylistSong extends JFrame {
 				
 				System.out.println(list.getSelectedValue());
 				if(list.getSelectedValue() == null){
-					JOptionPane.showMessageDialog(null, "You did not select a playlist!");
+					JOptionPane.showMessageDialog(null, "You did not select a Song!");
 				}else {
 					
 					listModel.remove(list.getSelectedIndex());

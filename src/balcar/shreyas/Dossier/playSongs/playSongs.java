@@ -4,35 +4,58 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
+import java.util.Timer;
 
-import javax.swing.ImageIcon;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import balcar.shreyas.Dossier.Timer.mp3Timer;
+import balcar.shreyas.Dossier.aboutSong.aboutSong;
 import balcar.shreyas.Dossier.allSongs.allSongs;
 import balcar.shreyas.Dossier.mp3Player.mp3Player;
 
 public class playSongs extends JFrame {
 
+
 	private JPanel contentPane;
 	private int selectedIndex = allSongs.selectedSongIndex;
 	mp3Player mp3 = new mp3Player();
-
-
-	public playSongs() {
+	public static File mp3Info = null;
+	
+	public playSongs() {		
+		this.addWindowListener(new WindowAdapter() {
+	        public void windowClosing(WindowEvent e) {
+	            	mp3.Stop();
+	        }
+	    });
 		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+allSongs.selectedSongString +".mp3");
 		
-		setBounds(100, 100, 340, 393);
+		File t = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+allSongs.selectedSongString +".mp3");
+		try {
+			mp3.getMp3Info(t);
+		} catch (UnsupportedAudioFileException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		Timer timer = new Timer();
+		
+		
+		timer.schedule(new mp3Timer(), 1000);
+		
+		
+		setBounds(100, 100, 275, 165);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -51,28 +74,7 @@ public class playSongs extends JFrame {
 		final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
 		
 		
-		final String[] array = names.toArray(new String[names.size()]);	
-				
-		
-		
-		
-		
-		
-
-	
-		
-		
-		
-		
-		
-		
-		
-		JSlider slider = new JSlider();
-		slider.setBackground(Color.LIGHT_GRAY);
-		slider.setForeground(Color.LIGHT_GRAY);
-		slider.setValue(0);
-		slider.setBounds(10, 291, 304, 23);
-		contentPane.add(slider);
+		final String[] array = names.toArray(new String[names.size()]);
 		
 		
 	
@@ -80,28 +82,22 @@ public class playSongs extends JFrame {
 		JButton btnNextSong = new JButton("Next song");
 		
 		btnNextSong.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnNextSong.setBounds(234, 325, 80, 23);
+		btnNextSong.setBounds(191, 117, 80, 23);
 		contentPane.add(btnNextSong);
 		
 		final JLabel songTitle = new JLabel(allSongs.selectedSong);
 		
 		songTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		songTitle.setBounds(10, 257, 275, 23);
+		songTitle.setBounds(6, 82, 265, 23);
 		contentPane.add(songTitle);
 		
-		JLabel playlist = new JLabel("");
+		JLabel playlist = new JLabel("No Playlist Selected");
 		playlist.setToolTipText("test");
 		playlist.setHorizontalAlignment(SwingConstants.CENTER);
-		playlist.setBounds(33, 6, 275, 23);
+		playlist.setBounds(6, 6, 263, 23);
 		contentPane.add(playlist);
 		
-		JButton btnNewButton = new JButton("Shuffle");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBounds(245, 41, 89, 29);
-		contentPane.add(btnNewButton);
+
 		
 		
 		
@@ -140,6 +136,8 @@ public class playSongs extends JFrame {
 				if(playPause.getText().equals("Pause\r\n") ){
 				playPause.setText("Play\r\n");
 				mp3.Pause();
+				
+				System.out.println("I am hear as well");
 				}else {
 					playPause.setText("Pause\r\n");
 					mp3.Resume("/Users/shreyas/Desktop/Dossier-Project/music/" + songNames[allSongs.selectedSongIndex] );
@@ -148,7 +146,7 @@ public class playSongs extends JFrame {
 				}
 			}
 		});
-		playPause.setBounds(127, 325, 80, 23);
+		playPause.setBounds(99, 116, 80, 23);
 		contentPane.add(playPause);
 		
 		
@@ -162,8 +160,7 @@ public class playSongs extends JFrame {
 					mp3.songIndex=0;
 				}
 		
-		
-				
+				mp3.Stop();
 				
 		allSongs.selectedSongIndex++;
 		
@@ -196,13 +193,11 @@ public class playSongs extends JFrame {
 		JButton btnLastSong = new JButton("Last song");
 		btnLastSong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				mp3.Stop();	
+				
 				if(playPause.equals("Play\r\n")){
 					mp3.songIndex=0;
 				}
-		
-		
 				mp3.Stop();	
 				
 		allSongs.selectedSongIndex--;
@@ -234,11 +229,50 @@ public class playSongs extends JFrame {
 				
 			}
 		});
+		JButton btnNewButton = new JButton("Shuffle");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				shuffle(songNames);
+				
+				
+				
+			}
+		});
+		btnNewButton.setBounds(6, 41, 89, 29);
+		contentPane.add(btnNewButton);
 		btnLastSong.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		btnLastSong.setBounds(10, 325, 81, 23);
+		btnLastSong.setBounds(6, 117, 81, 23);
 		contentPane.add(btnLastSong);
+		
+		JButton btnAboutSong = new JButton("About Song");
+		btnAboutSong.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				mp3Info = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
+				new aboutSong();
+				
+		
+			}
+		});
+		btnAboutSong.setBounds(158, 41, 117, 29);
+		contentPane.add(btnAboutSong);
 		
 		
 	}
+	
+	public static void shuffle(String[] arr){
+		Random rnd = new Random();
+	    for (int i = arr.length - 1; i > 0; i--)
+	    {
+	      int index = rnd.nextInt(i + 1);
+	      // Simple swap
+	      String a = arr[index];
+	      arr[index] = arr[i];
+	      arr[i] = a;
+	    }
+	    
+	}
+
+	  
 }
 
