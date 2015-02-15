@@ -145,17 +145,7 @@ public class mp3Player {
 	        String album = (String) properties.get(key_album);
 	        
 	        String key_date = "date";
-	        String date = (String) properties.get(key_date);
-
-	        
-	        System.out.println("Time = " + min + ":" + sec);
-	        System.out.println("Author: " + author);
-	        System.out.println("Title: " + title);
-	        System.out.println("Album: " + album);
-	        System.out.println("Date: " + date);
-	    
-	        
-	        
+	        String date = (String) properties.get(key_date);  
 	        infoSong[0] = title;
 	        infoSong[1] = author;
 	        infoSong[2] = min + ":" + sec;

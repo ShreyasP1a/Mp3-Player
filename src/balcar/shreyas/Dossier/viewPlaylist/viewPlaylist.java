@@ -28,6 +28,16 @@ import javax.swing.border.EmptyBorder;
 import balcar.shreyas.Dossier.MainMenu.MainMenu;
 
 public class viewPlaylist extends JFrame {
+	
+	
+	
+			
+			
+
+		
+		
+
+	
 
 	private JPanel contentPane;
 	private DefaultListModel listModel;
@@ -152,4 +162,8 @@ public class viewPlaylist extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+	
+
+	
+	
 }

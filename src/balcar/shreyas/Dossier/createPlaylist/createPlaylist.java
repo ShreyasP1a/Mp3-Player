@@ -153,7 +153,7 @@ public class createPlaylist extends JFrame {
 							
 							writer.print(str);
 							writer.println();
-							System.out.println(str);
+							
 						}
 						
 						

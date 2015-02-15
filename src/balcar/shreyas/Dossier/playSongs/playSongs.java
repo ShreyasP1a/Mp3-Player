@@ -123,9 +123,6 @@ public class playSongs extends JFrame {
 		for(int j =1; j< array.length; j++){
 			songNames[j-1] = test[j];
 		}
-		for(String a : songNames){
-			System.out.println(a);
-		}
 		
 		
 		
@@ -211,11 +208,7 @@ public class playSongs extends JFrame {
 			}
 			
 			
-			int i =0;
-			for(String a :songNames){
-				System.out.println(i+": "+ a);
-				i++;
-			}
+			
 			
 			songTitle.setText(songNames[allSongs.selectedSongIndex].substring(0, songNames[allSongs.selectedSongIndex].length()-4));
 			
@@ -259,6 +252,9 @@ public class playSongs extends JFrame {
 		
 		
 	}
+	
+	
+	//shuffle the Songs
 	
 	public static void shuffle(String[] arr){
 		Random rnd = new Random();

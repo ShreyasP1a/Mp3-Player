@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -38,7 +39,7 @@ public class allSongs extends JFrame {
 	public static String selectedSongString;
 	
 	mp3Player mp3 = new mp3Player();
-
+	
 	private JPanel contentPane;
 
 	public allSongs() {
@@ -63,7 +64,7 @@ public class allSongs extends JFrame {
 		if (OS.equals("WINDOWS 7")) {
 			f = new File(
 					"C:/Users/s07994809/Desktop/workspace/Dossier-Project/music/");
-			System.out.println("Windows");
+			
 		} else {
 			f = new File("/Users/shreyas/Desktop/Dossier-Project/music/");
 			
@@ -119,13 +120,6 @@ public class allSongs extends JFrame {
 					selectedSongIndex = list.getSelectedIndex();
 					selectedSongString = (String) list.getSelectedValue();
 					
-					
-					
-					
-					
-					
-					
-					
 					new playSongs();
 				}
 			}
@@ -155,82 +149,139 @@ public class allSongs extends JFrame {
 						} else {
 							Files.delete(pathMac);
 						}
-						System.out.println(true);
-		
+						
 						listModel.remove(list.getSelectedIndex());
-						
-						
-
-						File f = null;
+				
 						
 						
 						
 						
+						
+						
+					
+						File playlistNames = null;
 						if(MainMenu.OS.equals("WINDOWS 7")){
-						 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/");
-						}else {
-							f =new File ("/Users/shreyas/Desktop/Dossier-Project/PlayList/");
-						}
-						final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));	
-						 
+							playlistNames =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/");
+							}else {
+								playlistNames =new File ("/Users/shreyas/Desktop/Dossier-Project/PlayList/");
+							}
+							final ArrayList<String> names = new ArrayList<String>(Arrays.asList(playlistNames.list()));	
+							 
+							final String[] values = names.toArray(new String[names.size()]);
+							
+							for (int i = 0; i < values.length; i++) {
+								String test = values[i];
+								if (test.startsWith(".")) {
+									values[i] = null;
+								}
+							}
 						
-						
-						
-						String[] values = names.toArray(new String[names.size()]);
-						
-						
-						
-						
-						
-						
-						for(int i = 1; i < values.length; i++){
-						
-						
-						File t = null;
-						 if(MainMenu.OS.equals("WINDOWS 7")){ 
-						 t = new File("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/" + values[i]);
-						 }else {
-							 t = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + values[i]);
-						 }
-						
-						Scanner sc = null;
+							final String[] playlistNames1 = new String[values.length-1];	
 							
 						
-						
-						
-						
-						
-						
-						
-						sc = new Scanner(t);
-						
-							 
-							 
+							for(int j =1; j< values.length; j++){
+								playlistNames1[j-1] = values[j];
+							}
+							
+						for(int k = 0; k< playlistNames1.length;k++){
+							Scanner sc = null;
+							
+							
+							try {
+								File playlistSong = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + playlistNames1[k]);
+								
+								sc = new Scanner(playlistSong);
+								
+							} catch (FileNotFoundException l) {
+								
+								l.printStackTrace();
+							}
 								List<String> lines = new ArrayList<String>();
 								while (sc.hasNextLine()) {
 								  lines.add(sc.nextLine());
 								}
-
-								final String[] arr = lines.toArray(new String[0]);
+								sc.close();
+								PrintWriter writer;
+								final String[] songNames = lines.toArray(new String[0]);
+								for(String a : songNames){
+									System.out.println(a);
+								}
+								Path path = Paths.get("PlayList/" + playlistNames1[k]);
 								
-								for(int j =0; j< arr.length;j++){
-									if(arr[j].equals(list.getSelectedValue())){
-										System.out.println("true");
+								try {
+									Files.deleteIfExists(path);
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								
+								File file = new File("PlayList/"+playlistNames1[k]);
+								if (!file.exists()) {
+								
+									// Create the file
+									try {
+										file.createNewFile();
+									
+										writer = new PrintWriter(file, "UTF-8");
+										
+										for(int z = 0; z< songNames.length;z++){
+											
+											if(songNames[z].equals(list.getSelectedValue())){
+												
+											}else{
+												writer.print(songNames[z]);
+												writer.println();
+											}
+											
+										}
+										writer.close();
+										
+									
+									} catch (IOException t) {
+										// TODO Auto-generated catch block
+										t.printStackTrace();
 									}
+									
 								}
 								
 								
-								
-								sc.close();
-								
+						}
+							
+							
+							
 					
-						
-						}	
-						
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					} catch (IOException t) {
 						// TODO Auto-generated catch block
 						t.printStackTrace();
 					}
+					
+					
 				}
 			}
 		});
