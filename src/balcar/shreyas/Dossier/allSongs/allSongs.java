@@ -26,6 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import balcar.shreyas.Dossier.MainMenu.MainMenu;
+import balcar.shreyas.Dossier.mp3Player.mp3Player;
 import balcar.shreyas.Dossier.playSongs.playSongs;
 import balcar.shreyas.Dossier.viewPlaylist.viewPlaylist;
 
@@ -34,6 +35,9 @@ public class allSongs extends JFrame {
 
 	private DefaultListModel listModel;
 	public static int selectedSongIndex;
+	public static String selectedSongString;
+	
+	mp3Player mp3 = new mp3Player();
 
 	private JPanel contentPane;
 
@@ -111,8 +115,17 @@ public class allSongs extends JFrame {
 					selectedSong = (String) list.getModel().getElementAt(
 							list.getSelectedIndex());
 
-					selectedSongIndex = list.getSelectedIndex();
 
+					selectedSongIndex = list.getSelectedIndex();
+					selectedSongString = (String) list.getSelectedValue();
+					
+					
+					
+					
+					
+					
+					
+					
 					new playSongs();
 				}
 			}

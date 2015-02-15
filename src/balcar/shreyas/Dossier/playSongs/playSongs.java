@@ -17,16 +17,20 @@ import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import balcar.shreyas.Dossier.allSongs.allSongs;
+import balcar.shreyas.Dossier.mp3Player.mp3Player;
 
 public class playSongs extends JFrame {
 
 	private JPanel contentPane;
 	private int selectedIndex = allSongs.selectedSongIndex;
-	
+	mp3Player mp3 = new mp3Player();
 
 
 	public playSongs() {
+		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+allSongs.selectedSongString +".mp3");
 		
 		setBounds(100, 100, 340, 393);
 		setLocationRelativeTo(null);
@@ -70,19 +74,6 @@ public class playSongs extends JFrame {
 		slider.setBounds(10, 291, 304, 23);
 		contentPane.add(slider);
 		
-		final JButton playPause = new JButton("Pause\r\n");
-		playPause.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(playPause.getText().equals("Pause") ){
-				playPause.setText("Play");
-				}else {
-					playPause.setText("Pause");
-
-				}
-			}
-		});
-		playPause.setBounds(127, 325, 80, 23);
-		contentPane.add(playPause);
 		
 		JButton btnLastSong = new JButton("Last song");
 		btnLastSong.addActionListener(new ActionListener() {
@@ -111,35 +102,62 @@ public class playSongs extends JFrame {
 		playlist.setBounds(33, 6, 275, 23);
 		contentPane.add(playlist);
 		
-		
-		ImageIcon shuffle = new ImageIcon("/Users/shreyas/Desktop/Dossier-Project/shuffle3.png");
-		
-		JButton btnNewButton = new JButton(shuffle);
+		JButton btnNewButton = new JButton("Shuffle");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(274, 41, 60, 30);
+		btnNewButton.setBounds(245, 41, 89, 29);
 		contentPane.add(btnNewButton);
+		
+		
+		ImageIcon shuffle = new ImageIcon("/Users/shreyas/Desktop/Dossier-Project/shuffle3.png");
 		setVisible(true);
+		
+		System.out.println();
+		
+		
+		
+		final String[] songNames = new String[array.length-1];	
+		
+		String[] test = new String[array.length];
+
+			
+		
+		
 		
 		
 		
 		
 		btnNextSong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				mp3.Stop();	
 				
-			allSongs.selectedSongIndex++;
-			
-			
-			
-			if(allSongs.selectedSongIndex > array.length-1){
+		
+		
+				
+				
+		allSongs.selectedSongIndex++;
+		
+		
+		
+		System.out.println(allSongs.selectedSongIndex);	
+			System.out.println(songNames.length);
+			if( allSongs.selectedSongIndex >= songNames.length){
 				allSongs.selectedSongIndex =0;
 			}
 			
-			songTitle.setText(array[allSongs.selectedSongIndex].substring(0, array[allSongs.selectedSongIndex].length()-4));
 			
-		
+			int i =0;
+			for(String a :songNames){
+				System.out.println(i+": "+ a);
+				i++;
+			}
+			
+			songTitle.setText(songNames[allSongs.selectedSongIndex].substring(0, songNames[allSongs.selectedSongIndex].length()-4));
+			
+
+		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
 				
 				
 				
@@ -147,6 +165,23 @@ public class playSongs extends JFrame {
 				
 			}
 		});
+		final JButton playPause = new JButton("Pause\r\n");
+		playPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(playPause.getText().equals("Pause\r\n") ){
+				playPause.setText("Play\r\n");
+				mp3.Pause();
+				}else {
+					playPause.setText("Pause\r\n");
+					mp3.Resume("/Users/shreyas/Desktop/Dossier-Project/music/" + allSongs.selectedSongString + ".mp3");
+					
+					
+				}
+			}
+		});
+		playPause.setBounds(127, 325, 80, 23);
+		contentPane.add(playPause);
+		
 	}
 }
 

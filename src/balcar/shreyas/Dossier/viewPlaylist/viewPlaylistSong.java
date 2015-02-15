@@ -26,12 +26,15 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import balcar.shreyas.Dossier.MainMenu.MainMenu;
+import balcar.shreyas.Dossier.mp3Player.mp3Player;
+import balcar.shreyas.Dossier.playSongs.playSongs;
 
 public class viewPlaylistSong extends JFrame {
 
 	private JPanel contentPane;
 	private DefaultListModel listModel;
-
+	public static String selectedPlaylistSong;
+	mp3Player mp3 = new mp3Player();
 	 viewPlaylistSong() {
 		
 		setBounds(100, 100, 285, 449);
@@ -111,6 +114,17 @@ public class viewPlaylistSong extends JFrame {
 		
 		
 		JButton btnPlay = new JButton("Play");
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new playSongs();
+				
+				selectedPlaylistSong = (String) list.getSelectedValue();
+				mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+list.getSelectedValue() +".mp3");
+				
+			}
+		});
+		
+	
 		btnPlay.setBounds(151, 377, 89, 23);
 		contentPane.add(btnPlay);
 		System.out.println(viewPlaylist.selectedPlaylist);
