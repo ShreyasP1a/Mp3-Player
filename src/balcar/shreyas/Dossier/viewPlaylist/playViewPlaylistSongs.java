@@ -36,6 +36,7 @@ public class playViewPlaylistSongs extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 	        public void windowClosing(WindowEvent e) {
 	            	mp3.Stop();
+	            	mp3PlaylistInfo=null;
 	        }
 	    });
 		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+viewPlaylistSong.selectedPlaylistSong +".mp3");
