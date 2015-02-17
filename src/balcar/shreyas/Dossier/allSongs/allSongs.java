@@ -62,8 +62,7 @@ public class allSongs extends JFrame {
 		
 		
 		if (OS.equals("WINDOWS 7")) {
-			f = new File(
-					"C:/Users/s07994809/Desktop/workspace/Dossier-Project/music/");
+			f = new File(MainMenu.newAppData + "/Dossier/music");
 			
 		} else {
 			f = new File("/Users/shreyas/Desktop/Dossier-Project/music/");
@@ -136,7 +135,7 @@ public class allSongs extends JFrame {
 				} else {
 
 					Path pathWindows = Paths
-							.get("C:/Users/s07994809/Desktop/workspace/Dossier-Project/Music/"
+							.get(MainMenu.newAppData + "/Dossier/music"
 									+ list.getSelectedValue() + ".mp3");
 
 					Path pathMac = Paths
@@ -246,34 +245,7 @@ public class allSongs extends JFrame {
 								
 								
 						}
-							
-							
-							
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+
 					
 					
 					} catch (IOException t) {

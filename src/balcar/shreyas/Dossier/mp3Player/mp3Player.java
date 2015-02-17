@@ -60,7 +60,7 @@ public class mp3Player {
 			public void run(){
 				try {
 					player.play();
-					System.out.println("I reach here");
+
 				} catch (JavaLayerException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

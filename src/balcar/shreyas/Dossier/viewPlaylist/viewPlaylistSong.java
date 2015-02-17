@@ -55,7 +55,7 @@ public class viewPlaylistSong extends JFrame {
 		listModel = new DefaultListModel();
 		 File f = null;
 		 if(MainMenu.OS.equals("WINDOWS 7")){ 
-		 f = new File("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
+		 f = new File(MainMenu.newAppData + "/Dossier/playlist" + viewPlaylist.selectedPlaylist+".txt");
 		 }else {
 			 f = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
 		 }

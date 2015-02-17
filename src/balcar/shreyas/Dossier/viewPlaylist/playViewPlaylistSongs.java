@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import balcar.shreyas.Dossier.MainMenu.MainMenu;
 import balcar.shreyas.Dossier.aboutSong.aboutSong;
 import balcar.shreyas.Dossier.allSongs.allSongs;
 import balcar.shreyas.Dossier.mp3Player.mp3Player;
@@ -53,7 +54,7 @@ public class playViewPlaylistSongs extends JFrame {
 		final String OS = System.getProperty("os.name").toUpperCase();
 		File f = null;
 		if(OS.equals("WINDOWS 7")){
-		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/Playlist/" + viewPlaylist.selectedPlaylist+".txt");
+		 f =new File (MainMenu.newAppData + "/Dossier/Playlist" + viewPlaylist.selectedPlaylist+".txt");
 		}else{
 			 f =new File ("/Users/shreyas/Desktop/Dossier-Project/Playlist/" + viewPlaylist.selectedPlaylist+".txt");
 

@@ -6,7 +6,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -14,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,8 +25,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import balcar.shreyas.Dossier.allSongs.allSongs;
 import balcar.shreyas.Dossier.createPlaylist.createPlaylist;
 import balcar.shreyas.Dossier.viewPlaylist.viewPlaylist;
-
-import javax.swing.SwingConstants;
 
 public class MainMenu extends JFrame {
 public static String playlistName;
@@ -33,6 +35,12 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 
 	private JPanel contentPane;
 
+	public static String appData = System.getenv("APPDATA");
+	
+	public static final String newAppData = appData.replace("\\" , "/");
+	
+	public static Path path = Paths.get(newAppData + "/Dossier");
+	
 	/**
 	 * Launch the application.
 	 */
@@ -65,7 +73,32 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 		
 
 
+			
+
+
+
+		
+		
 	
+		if(Files.isDirectory(path)){
+			
+		}else{
+			try {
+				Files.createDirectories((path));
+				Path pathMusic = Paths.get(newAppData+ "/Dossier/music");
+				Path pathPlaylist = Paths.get(newAppData+ "/Dossier/playlist");
+				
+				Files.createDirectories(pathMusic);
+				Files.createDirectories(pathPlaylist);
+				
+				
+				
+			} catch (IOException e1) {
+			
+				e1.printStackTrace();
+			}
+		}
+		
 		
 		
 		
@@ -109,7 +142,7 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 					 file = fc.getSelectedFile();
 					fileName = file.getName();
 					if(OS.equals("WINDOWS 7")){
-					file.renameTo(new File("C:/Users/s07994809/Desktop/workspace/Dossier-Project/music/" + fileName ));
+					file.renameTo(new File(newAppData+ "/Dossier/music" + fileName ));
 					}else {
 						file.renameTo(new File("/Users/shreyas/Desktop/Dossier-Project/music/ " + fileName ));
 					}
