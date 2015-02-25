@@ -120,8 +120,13 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 		JButton btnCreatePlaylist = new JButton("Create Playlist");
 		btnCreatePlaylist.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				playlistName = JOptionPane.showInputDialog(null, "Enter Your Playlist Name");
+				String  a =playlistName = JOptionPane.showInputDialog(null, "Enter Your Playlist Name");
+				
+				 if(a == null){
+					
+				}else{
 				new createPlaylist().setVisible(true);
+				}
 				
 				}
 		});
