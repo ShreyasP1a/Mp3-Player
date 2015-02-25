@@ -55,7 +55,7 @@ public class viewPlaylistSong extends JFrame {
 		listModel = new DefaultListModel();
 		 File f = null;
 		 if(MainMenu.OS.equals("WINDOWS 7")){ 
-		 f = new File(MainMenu.newAppData + "/Dossier/playlist" + viewPlaylist.selectedPlaylist+".txt");
+		 f = new File(MainMenu.newAppData + "/Dossier/playlist/" + viewPlaylist.selectedPlaylist+".txt");
 		 }else {
 			 f = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + viewPlaylist.selectedPlaylist+".txt");
 		 }
@@ -98,11 +98,17 @@ public class viewPlaylistSong extends JFrame {
 		JButton btnPlay = new JButton("Play");
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if(list.getSelectedValue()==null){
+					
+					JOptionPane.showMessageDialog(null, "You did not select a Song!");
+				}else{
+				
 				selectedPlaylistSong = (String) list.getSelectedValue();
 				selectedSongIndex = list.getSelectedIndex();
 				
 				new playViewPlaylistSongs();
-				
+				}
 				
 			}
 		});
@@ -126,6 +132,12 @@ public class viewPlaylistSong extends JFrame {
 				}else {
 					
 					listModel.remove(list.getSelectedIndex());
+					
+					
+					
+					
+					
+					
 				}
 				
 			}

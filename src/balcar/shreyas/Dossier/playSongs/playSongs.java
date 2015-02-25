@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import balcar.shreyas.Dossier.MainMenu.MainMenu;
 import balcar.shreyas.Dossier.Timer.mp3Timer;
 import balcar.shreyas.Dossier.aboutSong.aboutSong;
 import balcar.shreyas.Dossier.allSongs.allSongs;
@@ -41,22 +42,29 @@ public class playSongs extends JFrame {
 	            	mp3Info=null;
 	        }
 	    });
-		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+allSongs.selectedSongString +".mp3");
 		
-		File t = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+allSongs.selectedSongString +".mp3");
+		File t = null;
+		
+		if(MainMenu.OS.equals("WINDOWS 7")){
+			mp3.Play(MainMenu.newAppData + "/Dossier/music/"+allSongs.selectedSongString +".mp3");
+			t = new File(MainMenu.newAppData + "/Dossier/music/"+allSongs.selectedSongString +".mp3");
+		}else{
+		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+allSongs.selectedSongString +".mp3");
+		t = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+allSongs.selectedSongString +".mp3");
+		
+		}
+		
+		
 		try {
 			mp3.getMp3Info(t);
 		} catch (UnsupportedAudioFileException | IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		Timer timer = new Timer();
 		
 		
-		timer.schedule(new mp3Timer(), 1000);
 		
-		
-		setBounds(100, 100, 275, 165);
+		setBounds(100, 100, 299, 184);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -67,7 +75,7 @@ public class playSongs extends JFrame {
 		final String OS = System.getProperty("os.name").toUpperCase();
 		File f = null;
 		if(OS.equals("WINDOWS 7")){
-		 f =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/music/");
+		 f =new File (MainMenu.newAppData + "/Dossier/music/");
 		}else{
 			 f =new File ("/Users/shreyas/Desktop/Dossier-Project/music/");
 
@@ -138,8 +146,13 @@ public class playSongs extends JFrame {
 				System.out.println("I am hear as well");
 				}else {
 					playPause.setText("Pause\r\n");
-					mp3.Resume("/Users/shreyas/Desktop/Dossier-Project/music/" + songNames[allSongs.selectedSongIndex] );
+					if(MainMenu.OS.equals("WINDOWS 7")){
+					mp3.Resume((MainMenu.newAppData + "/Dossier/music/" + songNames[allSongs.selectedSongIndex]));
+							
+					}else {
 					
+					mp3.Resume("/Users/shreyas/Desktop/Dossier-Project/music/" + songNames[allSongs.selectedSongIndex] );
+					}
 					
 				}
 			}
@@ -180,7 +193,14 @@ public class playSongs extends JFrame {
 			songTitle.setText(songNames[allSongs.selectedSongIndex].substring(0, songNames[allSongs.selectedSongIndex].length()-4));
 			
 		if(playPause.getText().equals("Pause\r\n")){
-		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
+			
+		if(MainMenu.OS.equals("WINDOWS 7")){	
+			mp3.Play((MainMenu.newAppData + "/Dossier/music/" + songNames[allSongs.selectedSongIndex]));
+		}else{
+			mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
+		}
+		
+		
 		}
 				
 				
@@ -214,7 +234,11 @@ public class playSongs extends JFrame {
 			songTitle.setText(songNames[allSongs.selectedSongIndex].substring(0, songNames[allSongs.selectedSongIndex].length()-4));
 			
 		if(playPause.getText().equals("Pause\r\n")){
-		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
+			if(MainMenu.OS.equals("WINDOWS 7")){	
+				mp3.Play((MainMenu.newAppData + "/Dossier/music/" + songNames[allSongs.selectedSongIndex]));
+			}else{
+				mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
+			}
 		}
 				
 				
@@ -242,7 +266,15 @@ public class playSongs extends JFrame {
 		btnAboutSong.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
+				
+				
+				if(MainMenu.OS.equals("WINDOWS 7")){
+				
+					mp3Info = new File(MainMenu.newAppData + "/Dossier/music/"+songNames[allSongs.selectedSongIndex]);
+				}else {
 				mp3Info = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
+				}
 				new aboutSong();
 				
 		

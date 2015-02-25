@@ -137,7 +137,7 @@ public class createPlaylist extends JFrame {
 					 dispose();
 					 PrintWriter writer;
 					try {
-						File f = new File(MainMenu.newAppData + "/Dossier/playlist" + MainMenu.playlistName + ".txt");
+						File f = new File(MainMenu.newAppData + "/Dossier/playlist/" + MainMenu.playlistName + ".txt");
 						
 						if (!f.exists()) {
 							// Create the file

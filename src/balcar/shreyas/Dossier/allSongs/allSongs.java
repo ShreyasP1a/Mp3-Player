@@ -135,7 +135,7 @@ public class allSongs extends JFrame {
 				} else {
 
 					Path pathWindows = Paths
-							.get(MainMenu.newAppData + "/Dossier/music"
+							.get(MainMenu.newAppData + "/Dossier/music/"
 									+ list.getSelectedValue() + ".mp3");
 
 					Path pathMac = Paths
@@ -143,7 +143,7 @@ public class allSongs extends JFrame {
 									+ list.getSelectedValue() + ".mp3");
 
 					try {
-						if (OS.equals("Windows 7")) {
+						if (OS.equals("WINDOWS 7")) {
 							Files.delete(pathWindows);
 						} else {
 							Files.delete(pathMac);

@@ -121,7 +121,7 @@ public class viewPlaylist extends JFrame {
 					
 					Path path= null;
 					if(MainMenu.OS.equals("WINDOWS 7")){
-					 path = Paths.get( MainMenu.newAppData + "/Dossier/playlist"+ list.getSelectedValue() +".txt");
+					 path = Paths.get( MainMenu.newAppData + "/Dossier/playlist/"+ list.getSelectedValue() +".txt");
 					}else{
 						path = Paths.get( "/Users/shreyas/Desktop/Dossier-Project/PlayList/"+ list.getSelectedValue() +".txt");
 					}

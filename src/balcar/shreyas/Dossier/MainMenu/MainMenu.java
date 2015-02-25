@@ -63,7 +63,7 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 	 */
 	public MainMenu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 275, 400);
+		setBounds(100, 100, 275, 416);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -136,13 +136,14 @@ public static  String OS = System.getProperty("os.name").toUpperCase();
 				FileFilter filter = new FileNameExtensionFilter("Mp3", "mp3"); 
 				fc.addChoosableFileFilter(filter);
 				fc.setFileFilter(filter);
+				fc.setAcceptAllFileFilterUsed(false);
 				int returnVal = fc.showOpenDialog(contentPane);
 							
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					 file = fc.getSelectedFile();
 					fileName = file.getName();
 					if(OS.equals("WINDOWS 7")){
-					file.renameTo(new File(newAppData+ "/Dossier/music" + fileName ));
+					file.renameTo(new File(newAppData+ "/Dossier/music/" + fileName ));
 					}else {
 						file.renameTo(new File("/Users/shreyas/Desktop/Dossier-Project/music/ " + fileName ));
 					}

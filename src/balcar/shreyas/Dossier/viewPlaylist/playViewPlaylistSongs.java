@@ -38,11 +38,22 @@ public class playViewPlaylistSongs extends JFrame {
 	        public void windowClosing(WindowEvent e) {
 	            	mp3.Stop();
 	            	mp3PlaylistInfo=null;
+	        
 	        }
 	    });
+		
+		
+		
+		
+		
+		
+		if(MainMenu.OS.equals("WINDOWS 7")){
+			mp3.Play(MainMenu.newAppData + "/Dossier/music/"+viewPlaylistSong.selectedPlaylistSong +".mp3");
+			
+		}else {
 		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+viewPlaylistSong.selectedPlaylistSong +".mp3");
-
-		setBounds(100, 100, 275, 165);
+		}
+		setBounds(100, 100, 294, 191);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -54,7 +65,7 @@ public class playViewPlaylistSongs extends JFrame {
 		final String OS = System.getProperty("os.name").toUpperCase();
 		File f = null;
 		if(OS.equals("WINDOWS 7")){
-		 f =new File (MainMenu.newAppData + "/Dossier/Playlist" + viewPlaylist.selectedPlaylist+".txt");
+		 f =new File (MainMenu.newAppData + "/Dossier/Playlist/" + viewPlaylist.selectedPlaylist+".txt");
 		}else{
 			 f =new File ("/Users/shreyas/Desktop/Dossier-Project/Playlist/" + viewPlaylist.selectedPlaylist+".txt");
 
@@ -101,9 +112,7 @@ public class playViewPlaylistSongs extends JFrame {
 
 			final String[] songNames = lines.toArray(new String[0]);
 			
-			for(String a : songNames){
-				System.out.println(a);
-			}
+			
 				
 		
 		
@@ -120,8 +129,13 @@ public class playViewPlaylistSongs extends JFrame {
 				
 				}else {
 					playPause.setText("Pause\r\n");
+					
+					if(MainMenu.OS.equals("WINDOWS 7")){
+						mp3.Resume(MainMenu.newAppData + "/Dossier/music/" + songNames[viewPlaylistSong.selectedSongIndex] );
+					}else {
 					mp3.Resume("/Users/shreyas/Desktop/Dossier-Project/music/" + songNames[viewPlaylistSong.selectedSongIndex] );				
-				}
+					} 
+					}
 			}
 		});
 		playPause.setBounds(99, 116, 80, 23);
@@ -147,7 +161,12 @@ public class playViewPlaylistSongs extends JFrame {
 			songTitle.setText(songNames[viewPlaylistSong.selectedSongIndex].substring(0, songNames[viewPlaylistSong.selectedSongIndex].length()-4));
 			
 		if(playPause.getText().equals("Pause\r\n")){
-		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+		if(MainMenu.OS.equals("WINDOWS 7")){
+		
+			mp3.Play(MainMenu.newAppData + "/Dossier/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+		}else{
+			mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+		}
 		}	
 				
 			}
@@ -180,7 +199,12 @@ public class playViewPlaylistSongs extends JFrame {
 			songTitle.setText(songNames[viewPlaylistSong.selectedSongIndex].substring(0, songNames[viewPlaylistSong.selectedSongIndex].length()-4));
 			
 		if(playPause.getText().equals("Pause\r\n")){
-		mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+			if(MainMenu.OS.equals("WINDOWS 7")){
+				
+				mp3.Play(MainMenu.newAppData + "/Dossier/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+			}else{
+				mp3.Play("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+			}
 		}
 
 			}
@@ -216,8 +240,13 @@ public class playViewPlaylistSongs extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println(viewPlaylistSong.selectedSongIndex);
 				System.out.println(songNames[viewPlaylistSong.selectedSongIndex]);
+				if(MainMenu.OS.equals("WINDOWS 7")){
+					mp3PlaylistInfo = new File(MainMenu.newAppData + "/Dossier/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+					
+				}else{
+					mp3PlaylistInfo = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
 				
-				mp3PlaylistInfo = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[viewPlaylistSong.selectedSongIndex]);
+				}
 				new aboutSong();
 				
 		
