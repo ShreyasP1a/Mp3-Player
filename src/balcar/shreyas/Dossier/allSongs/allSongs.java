@@ -44,7 +44,7 @@ public class allSongs extends JFrame {
 
 	public allSongs() {
 
-		setBounds(100, 100, 350, 487);
+		setBounds(100, 100, 448, 487);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -151,101 +151,6 @@ public class allSongs extends JFrame {
 						
 						listModel.remove(list.getSelectedIndex());
 				
-						
-						
-						
-						
-						
-						
-					
-						File playlistNames = null;
-						if(MainMenu.OS.equals("WINDOWS 7")){
-							playlistNames =new File ("C:/Users/s07994809/Desktop/workspace/Dossier-Project/PlayList/");
-							}else {
-								playlistNames =new File ("/Users/shreyas/Desktop/Dossier-Project/PlayList/");
-							}
-							final ArrayList<String> names = new ArrayList<String>(Arrays.asList(playlistNames.list()));	
-							 
-							final String[] values = names.toArray(new String[names.size()]);
-							
-							for (int i = 0; i < values.length; i++) {
-								String test = values[i];
-								if (test.startsWith(".")) {
-									values[i] = null;
-								}
-							}
-						
-							final String[] playlistNames1 = new String[values.length-1];	
-							
-						
-							for(int j =1; j< values.length; j++){
-								playlistNames1[j-1] = values[j];
-							}
-							
-						for(int k = 0; k< playlistNames1.length;k++){
-							Scanner sc = null;
-							
-							
-							try {
-								File playlistSong = new File("/Users/shreyas/Desktop/Dossier-Project/PlayList/" + playlistNames1[k]);
-								
-								sc = new Scanner(playlistSong);
-								
-							} catch (FileNotFoundException l) {
-								
-								l.printStackTrace();
-							}
-								List<String> lines = new ArrayList<String>();
-								while (sc.hasNextLine()) {
-								  lines.add(sc.nextLine());
-								}
-								sc.close();
-								PrintWriter writer;
-								final String[] songNames = lines.toArray(new String[0]);
-								for(String a : songNames){
-									System.out.println(a);
-								}
-								Path path = Paths.get("PlayList/" + playlistNames1[k]);
-								
-								try {
-									Files.deleteIfExists(path);
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
-								
-								File file = new File("PlayList/"+playlistNames1[k]);
-								if (!file.exists()) {
-								
-									// Create the file
-									try {
-										file.createNewFile();
-									
-										writer = new PrintWriter(file, "UTF-8");
-										
-										for(int z = 0; z< songNames.length;z++){
-											
-											if(songNames[z].equals(list.getSelectedValue())){
-												
-											}else{
-												writer.print(songNames[z]);
-												writer.println();
-											}
-											
-										}
-										writer.close();
-										
-									
-									} catch (IOException t) {
-										// TODO Auto-generated catch block
-										t.printStackTrace();
-									}
-									
-								}
-								
-								
-						}
-
 					
 					
 					} catch (IOException t) {
@@ -259,6 +164,55 @@ public class allSongs extends JFrame {
 		});
 		btnDeleteSong.setBounds(30, 412, 110, 23);
 		contentPane.add(btnDeleteSong);
+		
+		JButton btnTestSongSearch = new JButton("Test Song Search");
+		btnTestSongSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			
+			removeSong("Cooler Than Me - Mike Posner.mp3");
+			}
+		});
+		btnTestSongSearch.setBounds(319, 237, 89, 23);
+		contentPane.add(btnTestSongSearch);
 		setVisible(true);
+	}
+	public void removeSong(String name){
+	
+	File f = new File(MainMenu.newAppData +"/Dossier/playlist");
+	final ArrayList<String> names = new ArrayList<String>(Arrays.asList(f.list()));
+	final String[] values = names.toArray(new String[names.size()]);
+	
+	
+		for(int i = 0; i < values.length;i++){
+			
+			File t = new File(MainMenu.newAppData + "/Dossier/playlist/" + values[i]);
+			Scanner sc = null;
+			
+			try {
+				sc = new Scanner(t);
+			} catch (FileNotFoundException e) {
+				
+				e.printStackTrace();
+			}
+				List<String> lines = new ArrayList<String>();
+				while (sc.hasNextLine()) {
+				  lines.add(sc.nextLine());
+				}
+				sc.close();
+				final String[] arr = lines.toArray(new String[0]);
+			
+				for(int j = 0; j< arr.length;j++ ){
+					if(name.equals(arr[j])){
+						arr[j] = null;
+					}
+					System.out.println();
+					System.out.println();
+				}
+			
+		}
+	
+	
+	
+	
 	}
 }

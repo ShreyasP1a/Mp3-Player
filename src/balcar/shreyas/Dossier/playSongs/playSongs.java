@@ -146,11 +146,11 @@ public class playSongs extends JFrame {
 				}else {
 					playPause.setText("Pause\r\n");
 					if(MainMenu.OS.equals("WINDOWS 7")){
-					mp3.Resume((MainMenu.newAppData + "/Dossier/music/" + songNames[allSongs.selectedSongIndex]));
+					mp3.Resume((MainMenu.newAppData + "/Dossier/music/" + songNames[allSongs.selectedSongIndex-1]));
 							
 					}else {
 					
-					mp3.Resume("/Users/shreyas/Desktop/Dossier-Project/music/" + songNames[allSongs.selectedSongIndex] );
+					mp3.Resume("/Users/shreyas/Desktop/Dossier-Project/music/" + songNames[allSongs.selectedSongIndex-1] );
 					}
 					
 				}
@@ -270,7 +270,7 @@ public class playSongs extends JFrame {
 				
 				if(MainMenu.OS.equals("WINDOWS 7")){
 				
-					mp3Info = new File(MainMenu.newAppData + "/Dossier/music/"+songNames[allSongs.selectedSongIndex]);
+					mp3Info = new File(MainMenu.newAppData + "/Dossier/music/"+songNames[allSongs.selectedSongIndex-1]);
 				}else {
 				mp3Info = new File("/Users/shreyas/Desktop/Dossier-Project/music/"+songNames[allSongs.selectedSongIndex]);
 				}
