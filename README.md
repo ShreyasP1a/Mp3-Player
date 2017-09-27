@@ -1,7 +1,7 @@
 # Dossier-Project
 This is a project for Junior year Ib Dossier project
 
-This is an mp3 player, I decided to make a program that allows me to listen to music, as long as I can sumplement the music.
+This is an mp3 player, I decided to make a program that allows me to listen to music, as long as I can supplement the music. It was also hard because you could not instal programs on school computers, and since most computers have java installed on them, running this program would be easy, and a good learning project.
 
 This was also built in order for me to understand Java, and create a bigger java project, than what we make in class
 
